@@ -40,11 +40,11 @@ double RKd = 0.34; //0.005
 double YKp = 0.35; //0.4
 double YKi = 0.1; //0.0006
 double YKd = 0.35; //0.005
-double error_pitch = 0;
-double pre_error_pitch = 0;
-double pre_error_pitch2 =0;
-double res_pitch = 0;
-double pre_res_pitch = 0;
+double error_roll = 0;
+double pre_error_roll = 0;
+double pre_error_roll2 =0;
+double res_roll = 0;
+double pre_res_roll = 0;
 double K = 0.04;
 const int EN1 = 5;
 const int EN2 = 6;
@@ -216,9 +216,9 @@ void loop() {
   Serial.print('|');
   Serial.println(z);
   
-  xa = (x_a *0.0039-(-0.01035))/0.99265;
-  ya = (y_a  *0.0039-0.0402)/1.0067;
-  za = (z_a *0.00390-0.10525)/0.97225;
+  xa = (x_a * 0.0039);
+  ya = (y_a * 0.0039);
+  za = (z_a * 0.00390);
   roll = (atan2(ya ,sqrt(za*za + xa*xa)) * 180) / 3.14;
   pitch = (atan2(xa ,sqrt(za*za + ya*ya)) * 180) / 3.14;
 
@@ -230,15 +230,15 @@ void loop() {
   Serial.print(" Pitch:");
   Serial.print(FilterPitch);
  
-  error_pitch = 0-FilterRoll;
-  res_pitch = pre_res_pitch+PKp*(error_pitch-pre_error_pitch)+ PKi*(error_pitch+pre_error_pitch)/2+PKd*(x*0.07 +0.2592)*0.01;//PKp*(error_pitch);// //PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2); //
-  out = res_pitch / 0.01;
+  error_roll = 0-FilterRoll;
+  res_roll = pre_res_roll+PKp*(error_roll-pre_error_roll)+ PKi*(error_roll+pre_error_roll)/2+PKd*(x*0.07 +0.2592)*0.01;//PKp*(error_pitch);// //PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2); //
+  out = res_roll / 0.01;
   RunMotor((int)out);
-  pre_res_pitch = res_pitch;
-  pre_error_pitch = error_pitch;
-  pre_error_pitch2 = pre_error_pitch;
+  pre_res_roll = res_roll;
+  pre_error_roll = error_roll;
+  pre_error_roll2 = pre_error_roll;
   Serial.print(" PID:");
-  Serial.println(res_pitch);
+  Serial.println(res_roll);
  /* Serial.print("Roll:");
   Serial.print(FilterRoll);
   Serial.print(" Pitch:");
