@@ -3,19 +3,8 @@
 */
 
 #include <Wire.h>
-// Адреса регистров гироскопа
-#define CTRL_REG1 0x20
-#define CTRL_REG2 0x21
-#define CTRL_REG3 0x22
-#define CTRL_REG4 0x23
-#define CTRL_REG5 0x24
-// Адреса регистров акселерометра
-#define POWER_CTL 0x2D
-#define DATA_FORMAT 0x31
-#define BW_RATE 0x2C
-// I2C адреса датчиков (ведомых устройств)
-int ADXL345_Address = 83; //Адрес ADXL345 (int)
-int L3G4200D_Address = 105; //Адрес L3G4200D (int)
+#include "gyro.h"
+#include "accel.h"
 
 int16_t x;
 int16_t y;
@@ -46,9 +35,9 @@ double pre_error_roll2 =0;
 double res_roll = 0;
 double pre_res_roll = 0;
 double K = 0.04;
-const int EN1 = 5;
+/*const int EN1 = 5;
 const int EN2 = 6;
-const int EN3 = 7;
+const int EN3 = 7;*/
 const int IN1 = 9;
 const int IN2 = 10;
 const int IN3 = 11;
@@ -112,67 +101,6 @@ void setup() {
   Serial.println(sineArraySize);*/
 }
 
-void getGyroValues(){
-  byte xMSB = readRegister(L3G4200D_Address, 0x29);
-  byte xLSB = readRegister(L3G4200D_Address, 0x28);
-  x = ((xMSB << 8) | xLSB);
-  byte yMSB = readRegister(L3G4200D_Address, 0x2B);
-  byte yLSB = readRegister(L3G4200D_Address, 0x2A);
-  y = ((yMSB << 8) | yLSB);
-  byte zMSB = readRegister(L3G4200D_Address, 0x2D);
-  byte zLSB = readRegister(L3G4200D_Address, 0x2C);
-  z = ((zMSB << 8) | zLSB);
-}
-
-void getADXLValues(){
-  byte xMSB = readRegister(ADXL345_Address, 0x33);
-  byte xLSB = readRegister(ADXL345_Address, 0x32);
-  x_a = ((xMSB << 8) | xLSB);
-  byte yMSB = readRegister(ADXL345_Address, 0x35);
-  byte yLSB = readRegister(ADXL345_Address, 0x34);
-  y_a = ((yMSB << 8) | yLSB);
-  byte zMSB = readRegister(ADXL345_Address, 0x37);
-  byte zLSB = readRegister(ADXL345_Address, 0x36);
-  z_a = ((zMSB << 8) | zLSB);
-}
-
-int setupL3G4200D(){
-  writeRegister(L3G4200D_Address, CTRL_REG1, 0x2f);
-  writeRegister(L3G4200D_Address, CTRL_REG2, 0x00);
-  writeRegister(L3G4200D_Address, CTRL_REG3, 0x00);
-  writeRegister(L3G4200D_Address, CTRL_REG4, 0x30);
-  writeRegister(L3G4200D_Address, CTRL_REG5, 0x00);
-}
-
-int setupADXL345()
-{
-   writeRegister(ADXL345_Address,POWER_CTL,8);
-  // left-justified, +/-16g, FULL_RES 
-   writeRegister(ADXL345_Address,DATA_FORMAT,0x0b);
-}
-
-void writeRegister(int deviceAddress, byte address, byte val) {
-    Wire.beginTransmission(deviceAddress);
-    Wire.write(address); 
-    Wire.write(val);
-    Wire.endTransmission();
-}
-
-int readRegister(int deviceAddress, byte address){
-    int v;
-    Wire.beginTransmission(deviceAddress);
-    Wire.write(address);
-    Wire.endTransmission();
-    Wire.requestFrom(deviceAddress, 1);
-    while(!Wire.available()) {
-        // Ждем?
-    }
-    v = Wire.read();
-    return v;
-}
- 
-//////////////////////////////////////////////////////////////////////////////
-
 //Вращаем мотором
 void RunMotor(int pos)
 {
@@ -218,7 +146,7 @@ void loop() {
   
   xa = (x_a * 0.0039);
   ya = (y_a * 0.0039);
-  za = (z_a * 0.00390);
+  za = (z_a * 0.0039);
   roll = (atan2(ya ,sqrt(za*za + xa*xa)) * 180) / 3.14;
   pitch = (atan2(xa ,sqrt(za*za + ya*ya)) * 180) / 3.14;
 
