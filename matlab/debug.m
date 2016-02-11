@@ -3,8 +3,8 @@ if ~isempty(instrfind)
     fclose(instrfind);
     delete(instrfind);
 end;
-s=serial('COM3');
-set(s,'BaudRate',9600,'DataBits',8,'StopBits',1,'Timeout',1500,'InputBufferSize',130,'OutputBufferSize',2,'Terminator','CR');
+s=serial('COM4');
+set(s,'BaudRate',250000,'DataBits',8,'StopBits',1,'Timeout',1500,'InputBufferSize',130,'OutputBufferSize',2,'Terminator','CR');
 fopen(s);
 
 figure(1);
@@ -37,7 +37,7 @@ while(1)
    drawnow;
    %axis([t-50 t -256 256]);
   % axis([0 100 -2 350]);
-  axis([0 22 -1 257]);
+  axis([0 700 -90 90]);
    a1_tmp = a1;
    a3_tmp = a3;
    a5_tmp = a5;

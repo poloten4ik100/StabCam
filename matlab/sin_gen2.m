@@ -1,5 +1,6 @@
 clc,clear,close all;
-n=0:0.00390625:1;
+n=0:0.003030303:1;
+size(n)
 A = 127;
 PWM_DUTY=127;
 y=A+PWM_DUTY *sin(2*pi*n);
