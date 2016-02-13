@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1059#1087#1088#1072#1074#1083#1103#1083#1082#1072' spsvi'
-  ClientHeight = 637
+  ClientHeight = 614
   ClientWidth = 993
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,24 +22,12 @@ object Form1: TForm1
     Left = 8
     Top = 103
     Width = 977
-    Height = 509
+    Height = 482
     ActivePage = TabSheet1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = #1054#1089#1085#1086#1074#1085#1086#1077
-      object Label11: TLabel
-        Left = 245
-        Top = 169
-        Width = 105
-        Height = 19
-        Caption = #1058#1072#1085#1075#1072#1078' (Pitch)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlue
-        Font.Height = -16
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
+      ExplicitHeight = 481
       object GroupBox1: TGroupBox
         Left = 3
         Top = 3
@@ -48,8 +36,8 @@ object Form1: TForm1
         Caption = #1050#1086#1101#1092#1092#1080#1094#1080#1077#1085#1090#1099' '#1055#1048#1044'-'#1088#1077#1075#1091#1083#1103#1090#1086#1088#1072
         TabOrder = 0
         object Label1: TLabel
-          Left = 66
-          Top = 44
+          Left = 20
+          Top = 49
           Width = 8
           Height = 13
           Caption = #1055
@@ -61,7 +49,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label2: TLabel
-          Left = 66
+          Left = 20
           Top = 83
           Width = 8
           Height = 13
@@ -74,7 +62,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 64
+          Left = 18
           Top = 120
           Width = 10
           Height = 13
@@ -87,7 +75,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label6: TLabel
-          Left = 245
+          Left = 189
           Top = 19
           Width = 80
           Height = 19
@@ -100,7 +88,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 233
+          Left = 189
           Top = 297
           Width = 116
           Height = 19
@@ -113,7 +101,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 66
+          Left = 18
           Top = 188
           Width = 8
           Height = 13
@@ -126,7 +114,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label9: TLabel
-          Left = 66
+          Left = 20
           Top = 227
           Width = 8
           Height = 13
@@ -139,7 +127,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label10: TLabel
-          Left = 64
+          Left = 18
           Top = 264
           Width = 10
           Height = 13
@@ -152,7 +140,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label12: TLabel
-          Left = 66
+          Left = 20
           Top = 322
           Width = 8
           Height = 13
@@ -165,7 +153,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 66
+          Left = 20
           Top = 361
           Width = 8
           Height = 13
@@ -178,7 +166,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label14: TLabel
-          Left = 64
+          Left = 18
           Top = 400
           Width = 10
           Height = 13
@@ -191,29 +179,29 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 784
-          Top = 40
+          Left = 688
+          Top = 49
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label16: TLabel
-          Left = 784
-          Top = 80
+          Left = 688
+          Top = 83
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label17: TLabel
-          Left = 784
+          Left = 688
           Top = 120
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label18: TLabel
-          Left = 632
-          Top = 40
+          Left = 535
+          Top = 49
           Width = 66
           Height = 13
           Caption = #1054#1090#1082#1083#1086#1085#1077#1085#1080#1077':'
@@ -225,8 +213,8 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label19: TLabel
-          Left = 632
-          Top = 80
+          Left = 535
+          Top = 83
           Width = 44
           Height = 13
           Caption = #1054#1096#1080#1073#1082#1072':'
@@ -238,7 +226,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label20: TLabel
-          Left = 632
+          Left = 535
           Top = 120
           Width = 140
           Height = 13
@@ -251,7 +239,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label21: TLabel
-          Left = 632
+          Left = 535
           Top = 188
           Width = 66
           Height = 13
@@ -264,7 +252,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label22: TLabel
-          Left = 632
+          Left = 535
           Top = 227
           Width = 44
           Height = 13
@@ -277,7 +265,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label23: TLabel
-          Left = 632
+          Left = 535
           Top = 264
           Width = 140
           Height = 13
@@ -290,7 +278,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label24: TLabel
-          Left = 632
+          Left = 544
           Top = 324
           Width = 66
           Height = 13
@@ -303,7 +291,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label25: TLabel
-          Left = 632
+          Left = 544
           Top = 363
           Width = 44
           Height = 13
@@ -316,7 +304,7 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label26: TLabel
-          Left = 632
+          Left = 545
           Top = 400
           Width = 130
           Height = 13
@@ -329,58 +317,71 @@ object Form1: TForm1
           ParentFont = False
         end
         object Label27: TLabel
-          Left = 792
+          Left = 688
           Top = 188
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label28: TLabel
-          Left = 792
+          Left = 688
           Top = 227
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label29: TLabel
-          Left = 792
+          Left = 688
           Top = 264
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label30: TLabel
-          Left = 784
+          Left = 728
           Top = 320
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label31: TLabel
-          Left = 784
+          Left = 728
           Top = 360
           Width = 6
           Height = 13
           Caption = '0'
         end
         object Label32: TLabel
-          Left = 784
-          Top = 400
+          Left = 728
+          Top = 392
           Width = 6
           Height = 13
           Caption = '0'
         end
+        object Label11: TLabel
+          Left = 189
+          Top = 166
+          Width = 105
+          Height = 19
+          Caption = #1058#1072#1085#1075#1072#1078' (Pitch)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -16
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
         object TrackBar1: TTrackBar
-          Left = 80
+          Left = 34
           Top = 44
-          Width = 417
+          Width = 415
           Height = 33
           Max = 1000
           TabOrder = 0
           OnChange = TrackBar1Change
         end
         object TrackBar2: TTrackBar
-          Left = 80
+          Left = 34
           Top = 83
           Width = 417
           Height = 41
@@ -389,8 +390,8 @@ object Form1: TForm1
           OnChange = TrackBar2Change
         end
         object TrackBar3: TTrackBar
-          Left = 80
-          Top = 122
+          Left = 34
+          Top = 120
           Width = 417
           Height = 33
           Max = 15000
@@ -398,32 +399,32 @@ object Form1: TForm1
           OnChange = TrackBar3Change
         end
         object Edit1: TEdit
-          Left = 503
-          Top = 41
-          Width = 105
+          Left = 455
+          Top = 46
+          Width = 74
           Height = 21
           TabOrder = 3
           Text = '0'
         end
         object Edit2: TEdit
-          Left = 503
+          Left = 455
           Top = 83
-          Width = 105
+          Width = 74
           Height = 21
           TabOrder = 4
           Text = '0'
         end
         object Edit3: TEdit
-          Left = 503
-          Top = 122
-          Width = 105
+          Left = 455
+          Top = 117
+          Width = 74
           Height = 21
           TabOrder = 5
           Text = '0'
         end
         object TrackBar4: TTrackBar
-          Left = 80
-          Top = 188
+          Left = 32
+          Top = 191
           Width = 417
           Height = 33
           Max = 1000
@@ -431,7 +432,7 @@ object Form1: TForm1
           OnChange = TrackBar4Change
         end
         object TrackBar5: TTrackBar
-          Left = 80
+          Left = 32
           Top = 227
           Width = 417
           Height = 41
@@ -440,7 +441,7 @@ object Form1: TForm1
           OnChange = TrackBar5Change
         end
         object TrackBar6: TTrackBar
-          Left = 80
+          Left = 34
           Top = 266
           Width = 417
           Height = 33
@@ -449,31 +450,31 @@ object Form1: TForm1
           OnChange = TrackBar6Change
         end
         object Edit4: TEdit
-          Left = 503
+          Left = 455
           Top = 185
-          Width = 105
+          Width = 74
           Height = 21
           TabOrder = 9
           Text = '0'
         end
         object Edit5: TEdit
-          Left = 503
-          Top = 227
-          Width = 105
+          Left = 455
+          Top = 224
+          Width = 74
           Height = 21
           TabOrder = 10
           Text = '0'
         end
         object Edit6: TEdit
-          Left = 503
-          Top = 266
-          Width = 105
+          Left = 455
+          Top = 261
+          Width = 74
           Height = 21
           TabOrder = 11
           Text = '0'
         end
         object TrackBar7: TTrackBar
-          Left = 80
+          Left = 34
           Top = 322
           Width = 417
           Height = 33
@@ -482,7 +483,7 @@ object Form1: TForm1
           OnChange = TrackBar7Change
         end
         object TrackBar8: TTrackBar
-          Left = 80
+          Left = 34
           Top = 361
           Width = 417
           Height = 41
@@ -491,7 +492,7 @@ object Form1: TForm1
           OnChange = TrackBar8Change
         end
         object TrackBar9: TTrackBar
-          Left = 80
+          Left = 34
           Top = 400
           Width = 417
           Height = 33
@@ -500,35 +501,35 @@ object Form1: TForm1
           OnChange = TrackBar9Change
         end
         object Edit7: TEdit
-          Left = 503
+          Left = 457
           Top = 321
-          Width = 105
+          Width = 72
           Height = 21
           TabOrder = 15
           Text = '0'
         end
         object Edit8: TEdit
-          Left = 503
+          Left = 457
           Top = 361
-          Width = 105
+          Width = 72
           Height = 21
           TabOrder = 16
           Text = '0'
         end
         object Edit9: TEdit
-          Left = 503
-          Top = 402
-          Width = 105
+          Left = 457
+          Top = 396
+          Width = 72
           Height = 21
           TabOrder = 17
           Text = '0'
         end
         object Button3: TButton
-          Left = 853
-          Top = 75
-          Width = 91
-          Height = 25
-          Caption = #1057#1073#1088#1086#1089
+          Left = 728
+          Top = 45
+          Width = 120
+          Height = 23
+          Caption = #1057#1090#1086#1087
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clRed
           Font.Height = -11
@@ -539,27 +540,61 @@ object Form1: TForm1
           OnClick = Button3Click
         end
         object Button4: TButton
-          Left = 853
-          Top = 222
-          Width = 91
+          Left = 728
+          Top = 183
+          Width = 120
           Height = 25
-          Caption = #1057#1073#1088#1086#1089
+          Caption = #1057#1090#1086#1087
           TabOrder = 19
           OnClick = Button4Click
+        end
+        object Button5: TButton
+          Left = 728
+          Top = 79
+          Width = 120
+          Height = 23
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' EEPROM'
+          TabOrder = 20
+          OnClick = Button5Click
+        end
+        object Button6: TButton
+          Left = 728
+          Top = 222
+          Width = 120
+          Height = 25
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' EEPROM'
+          TabOrder = 21
+          OnClick = Button6Click
+        end
+        object Button7: TButton
+          Left = 728
+          Top = 116
+          Width = 120
+          Height = 23
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1079' EEPROM'
+          TabOrder = 22
+          OnClick = Button7Click
+        end
+        object Button8: TButton
+          Left = 728
+          Top = 259
+          Width = 121
+          Height = 25
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1079' EEPROM'
+          TabOrder = 23
+          OnClick = Button8Click
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1005
-      ExplicitHeight = 499
+      ExplicitHeight = 481
     end
     object TabSheet3: TTabSheet
       Caption = #1043#1088#1072#1092#1080#1082#1080
       ImageIndex = 2
+      ExplicitHeight = 481
       object Label35: TLabel
         Left = 720
         Top = 267
@@ -820,7 +855,7 @@ object Form1: TForm1
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 618
+    Top = 595
     Width = 993
     Height = 19
     Panels = <
@@ -829,8 +864,12 @@ object Form1: TForm1
       end
       item
         Text = #1042#1077#1088#1089#1080#1103' 1.0'
-        Width = 50
+        Width = 70
+      end
+      item
+        Width = 250
       end>
+    ExplicitTop = 618
   end
   object ComPort1: TComPort
     BaudRate = br115200
@@ -898,5 +937,29 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     Left = 735
     Top = 466
+  end
+  object ComDataPacket5: TComDataPacket
+    ComPort = ComPort1
+    StartString = 'DD'
+    StopString = '#'
+    OnPacket = ComDataPacket5Packet
+    Left = 920
+    Top = 80
+  end
+  object ComDataPacket6: TComDataPacket
+    ComPort = ComPort1
+    StartString = 'LR'
+    StopString = '#'
+    OnPacket = ComDataPacket6Packet
+    Left = 688
+    Top = 8
+  end
+  object ComDataPacket7: TComDataPacket
+    ComPort = ComPort1
+    StartString = 'LP'
+    StopString = '#'
+    OnPacket = ComDataPacket7Packet
+    Left = 864
+    Top = 32
   end
 end

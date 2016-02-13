@@ -41,7 +41,6 @@ type
     Edit4: TEdit;
     Edit5: TEdit;
     Edit6: TEdit;
-    Label11: TLabel;
     TrackBar7: TTrackBar;
     TrackBar8: TTrackBar;
     TrackBar9: TTrackBar;
@@ -94,6 +93,14 @@ type
     Button3: TButton;
     Button4: TButton;
     Timer1: TTimer;
+    Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
+    ComDataPacket5: TComDataPacket;
+    ComDataPacket6: TComDataPacket;
+    Label11: TLabel;
+    ComDataPacket7: TComDataPacket;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -117,6 +124,13 @@ type
     procedure ComDataPacket4Packet(Sender: TObject; const Str: string);
     procedure Button4Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure ComDataPacket5Packet(Sender: TObject; const Str: string);
+    procedure ComDataPacket6Packet(Sender: TObject; const Str: string);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure ComDataPacket7Packet(Sender: TObject; const Str: string);
   private
     { Private declarations }
   public
@@ -168,6 +182,26 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
 ComPort1.WriteStr('PS'#10);
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+ComPort1.WriteStr('RA'#10);
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+ComPort1.WriteStr('PA'#10);
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+ComPort1.WriteStr('RL'#10);
+end;
+
+procedure TForm1.Button8Click(Sender: TObject);
+begin
+ComPort1.WriteStr('PL'#10);
 end;
 
 procedure TForm1.ComboBox1Change(Sender: TObject);
@@ -359,6 +393,76 @@ begin
  Label27.Caption:=filter_pitch_2;
  Label28.Caption:=error;
  Label29.Caption:=trim(str_tmp);
+end;
+
+procedure TForm1.ComDataPacket5Packet(Sender: TObject; const Str: string);
+var n,n1:integer;    d1,d2,d3:string;
+begin
+  {d1:= copy(Str,0,Length(Str));
+  n:= pos('|',d1);
+  d3:= copy(d1,1,n-1);
+  Delete(d1,1,n);
+  n1:= pos('|',d1);
+  d2:= copy(d1,1,n1-1);
+  Delete(d1,1,n1);        }
+ // Label35.Caption:=trim(str_tmp);
+ // Label37.Caption:=Str;
+ {Label27.Caption:=d2;
+ Label28.Caption:=d3;
+ Label29.Caption:=trim(d1); }
+ //StatusBar1.Panels[2].Text:=Str;
+end;
+
+procedure TForm1.ComDataPacket6Packet(Sender: TObject; const Str: string);
+var n,n1:integer;    tmp,kp,ki:string;
+begin
+  tmp:= copy(Str,0,Length(Str));
+  n:= pos('|',tmp);
+  kp:= copy(tmp,1,n-1);
+  Delete(tmp,1,n);
+  n1:= pos('|',tmp);
+  ki:= copy(tmp,1,n1-1);
+  Delete(tmp,1,n1);
+  edit1.Text:=kp;
+  edit2.Text:=ki;
+  edit3.Text:=trim(tmp);
+
+  TrackBar1.Position:=Trunc(strtofloat(kp)*100);
+  TrackBar2.Position:=Trunc(strtofloat(ki)*1000);
+  TrackBar3.Position:=Trunc(strtofloat(trim(tmp))*1000);
+ // Label35.Caption:=trim(str_tmp);
+ // Label37.Caption:=Str;
+ {Label27.Caption:=d2;
+ Label28.Caption:=d3;
+ Label29.Caption:=trim(d1); }
+ //StatusBar1.Panels[2].Text:=Str;
+ StatusBar1.Panels[2].Text:=Str;
+end;
+
+procedure TForm1.ComDataPacket7Packet(Sender: TObject; const Str: string);
+var n,n1:integer;    tmp,kp,ki:string;
+begin
+  tmp:= copy(Str,0,Length(Str));
+  n:= pos('|',tmp);
+  kp:= copy(tmp,1,n-1);
+  Delete(tmp,1,n);
+  n1:= pos('|',tmp);
+  ki:= copy(tmp,1,n1-1);
+  Delete(tmp,1,n1);
+  edit4.Text:=kp;
+  edit5.Text:=ki;
+  edit6.Text:=trim(tmp);
+
+  TrackBar4.Position:=Trunc(strtofloat(kp)*100);
+  TrackBar5.Position:=Trunc(strtofloat(ki)*1000);
+  TrackBar6.Position:=Trunc(strtofloat(trim(tmp))*1000);
+ // Label35.Caption:=trim(str_tmp);
+ // Label37.Caption:=Str;
+ {Label27.Caption:=d2;
+ Label28.Caption:=d3;
+ Label29.Caption:=trim(d1); }
+ //StatusBar1.Panels[2].Text:=Str;
+ StatusBar1.Panels[2].Text:=Str;
 end;
 
 end.

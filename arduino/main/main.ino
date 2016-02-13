@@ -1,7 +1,9 @@
+
 /* Начало положено в 2015 году
        Автор - Женя
 */
-
+#include <EEPROMex.h>
+#include <EEPROMVar.h>
 #include <Wire.h>
 #include "gyro.h"
 #include "accel.h"
@@ -131,6 +133,12 @@ void setup() {
   currentStepB2 = currentStepA2 + phaseShift;
   currentStepC2 = currentStepB2 + phaseShift;
   sineArraySize--;
+  PKp = EEPROM.readDouble(0);
+  PKi = EEPROM.readDouble(5);
+  PKd = EEPROM.readDouble(10);
+  RKp = EEPROM.readDouble(15);
+  RKi = EEPROM.readDouble(20);
+  RKd = EEPROM.readDouble(25);
 }
 
 //Вращаем мотором
@@ -201,6 +209,25 @@ void loop() {
         PKd=0;
         clear_pitch(); 
       }
+      if (inputString[1]=='A')
+      {
+         EEPROM.writeDouble(0,PKp);
+         EEPROM.writeDouble(5,PKi);
+         EEPROM.writeDouble(10,PKd); 
+      }
+      if (inputString[1]=='L')
+      {
+        PKp = EEPROM.readDouble(0);
+        PKi = EEPROM.readDouble(5);
+        PKd = EEPROM.readDouble(10);
+        Serial.print("LP");
+        Serial.print(PKp);
+        Serial.print('|');
+        Serial.print(PKi);
+        Serial.print('|');
+        Serial.print(PKd);
+        Serial.println('#');
+      }
     }
     
     if (inputString[0]=='R')
@@ -229,6 +256,25 @@ void loop() {
         RKi=0;
         RKd=0;
         clear_roll(); 
+      }
+      if (inputString[1]=='A')
+      {
+         EEPROM.writeDouble(15,RKp);
+         EEPROM.writeDouble(20,RKi);
+         EEPROM.writeDouble(25,RKd);
+      }
+      if (inputString[1]=='L')
+      {
+        RKp = EEPROM.readDouble(15);
+        RKi = EEPROM.readDouble(20);
+        RKd = EEPROM.readDouble(25);
+        Serial.print("LR");
+        Serial.print(RKp);
+        Serial.print('|');
+        Serial.print(RKi);
+        Serial.print('|');
+        Serial.print(RKd);
+        Serial.println('#');
       }
     }
     inputString = "";
@@ -299,9 +345,22 @@ void loop() {
   Serial.print('|');
   Serial.print((int)out);
   Serial.println('#');
+
+  // DEBUG INFO
+  Serial.print("DD");
+  Serial.print(RKp);
+  Serial.print('|');
+  Serial.print(RKi);
+  Serial.print('|');
+  Serial.print(RKd);
+  Serial.println('#');
+  
   delay(delay_);
 }
- 
+
+/* void debug(int pin) {
+  
+ }*/
  
 void setPwmFrequency(int pin) {
   if(pin == 5 || pin == 6 || pin == 9 || pin == 10) {
