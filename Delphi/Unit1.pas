@@ -256,37 +256,37 @@ end;
 
 procedure TForm1.TrackBar1Change(Sender: TObject);
 begin
-Edit1.Text:=floattostr(TrackBar1.Position / 100);
+Edit1.Text:=floattostr(TrackBar1.Position / 1000);
 ComPort1.WriteStr('RP'+Edit1.Text+''#10);
 end;
 
 procedure TForm1.TrackBar2Change(Sender: TObject);
 begin
-Edit2.Text:=floattostr(TrackBar2.Position / 1000);
+Edit2.Text:=floattostr(TrackBar2.Position / 10000);
 ComPort1.WriteStr('RI'+Edit2.Text+''#10);
 end;
 
 procedure TForm1.TrackBar3Change(Sender: TObject);
 begin
-Edit3.Text:=floattostr(TrackBar3.Position / 1000);
+Edit3.Text:=floattostr(TrackBar3.Position / 10000);
 ComPort1.WriteStr('RD'+Edit3.Text+''#10);
 end;
 
 procedure TForm1.TrackBar4Change(Sender: TObject);
 begin
-Edit4.Text:=floattostr(TrackBar4.Position / 100);
+Edit4.Text:=floattostr(TrackBar4.Position / 1000);
 ComPort1.WriteStr('PP'+Edit4.Text+''#10);
 end;
 
 procedure TForm1.TrackBar5Change(Sender: TObject);
 begin
-Edit5.Text:=floattostr(TrackBar5.Position / 1000);
+Edit5.Text:=floattostr(TrackBar5.Position / 10000);
 ComPort1.WriteStr('PI'+Edit5.Text+''#10);
 end;
 
 procedure TForm1.TrackBar6Change(Sender: TObject);
 begin
-Edit6.Text:=floattostr(TrackBar6.Position / 1000);
+Edit6.Text:=floattostr(TrackBar6.Position / 10000);
 ComPort1.WriteStr('PD'+Edit6.Text+''#10);
 end;
 
@@ -427,9 +427,9 @@ begin
   edit2.Text:=ki;
   edit3.Text:=trim(tmp);
 
-  TrackBar1.Position:=Trunc(strtofloat(kp)*100);
-  TrackBar2.Position:=Trunc(strtofloat(ki)*1000);
-  TrackBar3.Position:=Trunc(strtofloat(trim(tmp))*1000);
+  TrackBar1.Position:=Trunc(strtofloat(kp)*1000);
+  TrackBar2.Position:=Trunc(strtofloat(ki)*10000);
+  TrackBar3.Position:=Trunc(strtofloat(trim(tmp))*10000);
  // Label35.Caption:=trim(str_tmp);
  // Label37.Caption:=Str;
  {Label27.Caption:=d2;
@@ -453,9 +453,9 @@ begin
   edit5.Text:=ki;
   edit6.Text:=trim(tmp);
 
-  TrackBar4.Position:=Trunc(strtofloat(kp)*100);
-  TrackBar5.Position:=Trunc(strtofloat(ki)*1000);
-  TrackBar6.Position:=Trunc(strtofloat(trim(tmp))*1000);
+  TrackBar4.Position:=Trunc(strtofloat(kp)*1000);
+  TrackBar5.Position:=Trunc(strtofloat(ki)*10000);
+  TrackBar6.Position:=Trunc(strtofloat(trim(tmp))*10000);
  // Label35.Caption:=trim(str_tmp);
  // Label37.Caption:=Str;
  {Label27.Caption:=d2;

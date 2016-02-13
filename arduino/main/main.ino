@@ -41,7 +41,7 @@ double pre_error_pitch = 0;
 double pre_error_pitch2 =0;
 double res_pitch = 0;
 double pre_res_pitch = 0;
-double K = 0.05;
+double K = 0.04;
 double atmp_roll,at_roll = 0;
 double atmp_pitch,at_pitch = 0;
 const int EN1 = 5;
@@ -314,8 +314,11 @@ void loop() {
   // ПИД-регулятор
   error_roll = 0-FilterRoll;
   res_roll = pre_res_roll+RKp*(error_roll-pre_error_roll)+ RKi*(error_roll+pre_error_roll)/2+RKd*(x*0.07 +0.2592)*0.01;// + RKd*(error_roll-2*pre_error_roll+pre_error_roll2);////PKp*(error_pitch);// //PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2); //
-  out = res_roll;// / 0.1;
-
+  out = res_roll / 0.1;
+if (out>50)
+out = 50;
+if (out<-50)
+out = -50;
   RunMotor2((-1)*(int)out);
    
   pre_res_roll = res_roll;
@@ -331,7 +334,7 @@ void loop() {
   
   error_pitch = 0-FilterPitch;
   res_pitch = pre_res_pitch+PKp*(error_pitch-pre_error_pitch)+ PKi*(error_pitch+pre_error_pitch)/2+(-1)*PKd*(y*0.07 +0.8275)*0.01;//+PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2);//+(-1)*PKd*(y*0.07 +0.8275)*0.01;//PKp*(error_pitch);// // //
-  out = res_pitch;// / 0.1;
+  out = res_pitch / 0.1;
 
   RunMotor1((int)out);
 

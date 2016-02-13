@@ -27,7 +27,6 @@ object Form1: TForm1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = #1054#1089#1085#1086#1074#1085#1086#1077
-      ExplicitHeight = 481
       object GroupBox1: TGroupBox
         Left = 3
         Top = 3
@@ -589,11 +588,17 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 481
     end
     object TabSheet3: TTabSheet
       Caption = #1043#1088#1072#1092#1080#1082#1080
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 481
       object Label35: TLabel
         Left = 720
@@ -869,7 +874,6 @@ object Form1: TForm1
       item
         Width = 250
       end>
-    ExplicitTop = 618
   end
   object ComPort1: TComPort
     BaudRate = br115200
