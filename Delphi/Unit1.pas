@@ -101,6 +101,13 @@ type
     ComDataPacket6: TComDataPacket;
     Label11: TLabel;
     ComDataPacket7: TComDataPacket;
+    GroupBox3: TGroupBox;
+    ComboBox2: TComboBox;
+    Button9: TButton;
+    Button10: TButton;
+    ComDataPacket8: TComDataPacket;
+    CheckBox3: TCheckBox;
+    GroupBox4: TGroupBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -131,6 +138,11 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure ComDataPacket7Packet(Sender: TObject; const Str: string);
+    procedure ComboBox2Change(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure ComDataPacket8Packet(Sender: TObject; const Str: string);
+    procedure Button10Click(Sender: TObject);
+    procedure CheckBox3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -144,6 +156,14 @@ var
   t_roll, t_pitch:integer;
   accel_pitch,gyro_pitch,filter_pitch:string;
 
+  RP_d:integer;
+  RI_d:integer;
+  RD_d:integer;
+
+  PP_d:integer;
+  PI_d:integer;
+  PD_d:integer;
+
 implementation
 
 {$R *.dfm}
@@ -153,6 +173,12 @@ begin
 EnumComPorts(ComboBox1.Items);
 ComboBox1.ItemIndex:= 0;
 ComPort1.Port := ComboBox1.Items[ComboBox1.ItemIndex];
+end;
+
+procedure TForm1.Button10Click(Sender: TObject);
+begin
+ComPort1.WriteStr('SL'#10);
+
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -204,9 +230,60 @@ begin
 ComPort1.WriteStr('PL'#10);
 end;
 
+procedure TForm1.Button9Click(Sender: TObject);
+begin
+case ComboBox2.ItemIndex of
+0:ComPort1.WriteStr('SA1'+#10);
+1:ComPort1.WriteStr('SA0.1'+#10);
+2:ComPort1.WriteStr('SA0.01'+#10);
+end;
+end;
+
+procedure TForm1.CheckBox3Click(Sender: TObject);
+begin
+if checkBox3.Checked then
+ComPort1.WriteStr('SE'+#10) else
+ComPort1.WriteStr('ST'+#10);
+end;
+
 procedure TForm1.ComboBox1Change(Sender: TObject);
 begin
 ComPort1.Port := ComboBox1.Items[ComboBox1.ItemIndex];
+end;
+
+procedure TForm1.ComboBox2Change(Sender: TObject);
+begin
+case ComboBox2.ItemIndex of
+0:begin
+ComPort1.WriteStr('SD1'+#10);
+  RP_d:=100;
+  RI_d:=1000;
+  RD_d:=1000;
+  PP_d:=100;
+  PI_d:=1000;
+  PD_d:=1000;
+end;
+1:begin
+ComPort1.WriteStr('SD0.1'+#10);
+  RP_d:=1000;
+  RI_d:=10000;
+  RD_d:=10000;
+  PP_d:=1000;
+  PI_d:=10000;
+  PD_d:=10000;
+end;
+2:begin
+ComPort1.WriteStr('SD0.01'+#10);
+  RP_d:=10000;
+  RI_d:=100000;
+  RD_d:=100000;
+  PP_d:=10000;
+  PI_d:=100000;
+  PD_d:=100000;
+ end;
+end;
+
+
 end;
 
 procedure TForm1.ComPort1RxChar(Sender: TObject; Count: Integer);
@@ -242,6 +319,12 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
 FormatSettings.DecimalSeparator := '.';
+RP_d:=100;
+RI_d:=1000;
+RD_d:=1000;
+PP_d:=100;
+PI_d:=1000;
+PD_d:=1000;
 end;
 
 procedure TForm1.N2Click(Sender: TObject);
@@ -256,37 +339,37 @@ end;
 
 procedure TForm1.TrackBar1Change(Sender: TObject);
 begin
-Edit1.Text:=floattostr(TrackBar1.Position / 1000);
+Edit1.Text:=floattostr(TrackBar1.Position / RP_d);
 ComPort1.WriteStr('RP'+Edit1.Text+''#10);
 end;
 
 procedure TForm1.TrackBar2Change(Sender: TObject);
 begin
-Edit2.Text:=floattostr(TrackBar2.Position / 10000);
+Edit2.Text:=floattostr(TrackBar2.Position / RI_d);
 ComPort1.WriteStr('RI'+Edit2.Text+''#10);
 end;
 
 procedure TForm1.TrackBar3Change(Sender: TObject);
 begin
-Edit3.Text:=floattostr(TrackBar3.Position / 10000);
+Edit3.Text:=floattostr(TrackBar3.Position / RD_d);
 ComPort1.WriteStr('RD'+Edit3.Text+''#10);
 end;
 
 procedure TForm1.TrackBar4Change(Sender: TObject);
 begin
-Edit4.Text:=floattostr(TrackBar4.Position / 1000);
+Edit4.Text:=floattostr(TrackBar4.Position / PP_d);
 ComPort1.WriteStr('PP'+Edit4.Text+''#10);
 end;
 
 procedure TForm1.TrackBar5Change(Sender: TObject);
 begin
-Edit5.Text:=floattostr(TrackBar5.Position / 10000);
+Edit5.Text:=floattostr(TrackBar5.Position / PI_d);
 ComPort1.WriteStr('PI'+Edit5.Text+''#10);
 end;
 
 procedure TForm1.TrackBar6Change(Sender: TObject);
 begin
-Edit6.Text:=floattostr(TrackBar6.Position / 10000);
+Edit6.Text:=floattostr(TrackBar6.Position / PD_d);
 ComPort1.WriteStr('PD'+Edit6.Text+''#10);
 end;
 
@@ -427,9 +510,9 @@ begin
   edit2.Text:=ki;
   edit3.Text:=trim(tmp);
 
-  TrackBar1.Position:=Trunc(strtofloat(kp)*1000);
-  TrackBar2.Position:=Trunc(strtofloat(ki)*10000);
-  TrackBar3.Position:=Trunc(strtofloat(trim(tmp))*10000);
+  TrackBar1.Position:=Trunc(strtofloat(kp)*RP_d);
+  TrackBar2.Position:=Trunc(strtofloat(ki)*RI_d);
+  TrackBar3.Position:=Trunc(strtofloat(trim(tmp))*RD_d);
  // Label35.Caption:=trim(str_tmp);
  // Label37.Caption:=Str;
  {Label27.Caption:=d2;
@@ -453,9 +536,9 @@ begin
   edit5.Text:=ki;
   edit6.Text:=trim(tmp);
 
-  TrackBar4.Position:=Trunc(strtofloat(kp)*1000);
-  TrackBar5.Position:=Trunc(strtofloat(ki)*10000);
-  TrackBar6.Position:=Trunc(strtofloat(trim(tmp))*10000);
+  TrackBar4.Position:=Trunc(strtofloat(kp)*PP_d);
+  TrackBar5.Position:=Trunc(strtofloat(ki)*PI_d);
+  TrackBar6.Position:=Trunc(strtofloat(trim(tmp))*PD_d);
  // Label35.Caption:=trim(str_tmp);
  // Label37.Caption:=Str;
  {Label27.Caption:=d2;
@@ -463,6 +546,42 @@ begin
  Label29.Caption:=trim(d1); }
  //StatusBar1.Panels[2].Text:=Str;
  StatusBar1.Panels[2].Text:=Str;
+end;
+
+procedure TForm1.ComDataPacket8Packet(Sender: TObject; const Str: string);
+var  n,n1:integer; tmp:string; res:Extended;
+begin
+StatusBar1.Panels[2].Text:=Str;
+tmp:= copy(Str,0,Length(Str));
+n:= pos('|',tmp);
+res:= strtofloat(copy(tmp,1,n-1));
+if res=1.0 then begin
+   ComboBox2.ItemIndex:=0;
+   RP_d:=100;
+   RI_d:=1000;
+   RD_d:=1000;
+   PP_d:=100;
+   PI_d:=1000;
+   PD_d:=1000;
+end;
+if res=0.1 then  begin
+  ComboBox2.ItemIndex:=1;
+  RP_d:=1000;
+  RI_d:=10000;
+  RD_d:=10000;
+  PP_d:=1000;
+  PI_d:=10000;
+  PD_d:=10000;
+end;
+if res=0.01 then  begin
+  ComboBox2.ItemIndex:=2;
+  RP_d:=10000;
+  RI_d:=100000;
+  RD_d:=100000;
+  PP_d:=10000;
+  PI_d:=100000;
+  PD_d:=100000;
+end;
 end;
 
 end.

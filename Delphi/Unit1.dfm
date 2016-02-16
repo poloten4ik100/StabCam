@@ -29,7 +29,7 @@ object Form1: TForm1
       Caption = #1054#1089#1085#1086#1074#1085#1086#1077
       object GroupBox1: TGroupBox
         Left = 3
-        Top = 3
+        Top = 5
         Width = 958
         Height = 446
         Caption = #1050#1086#1101#1092#1092#1080#1094#1080#1077#1085#1090#1099' '#1055#1048#1044'-'#1088#1077#1075#1091#1083#1103#1090#1086#1088#1072
@@ -588,18 +588,59 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 481
+      object GroupBox3: TGroupBox
+        Left = 12
+        Top = 3
+        Width = 605
+        Height = 65
+        Caption = #1058#1086#1095#1085#1086#1089#1090#1100' '#1055#1048#1044
+        TabOrder = 0
+        object ComboBox2: TComboBox
+          Left = 16
+          Top = 24
+          Width = 313
+          Height = 21
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 0
+          Text = '1 '#1075#1088#1072#1076#1091#1089
+          OnChange = ComboBox2Change
+          Items.Strings = (
+            '1 '#1075#1088#1072#1076#1091#1089
+            '0.1 '#1075#1088#1072#1091#1089
+            '0.01 '#1075#1088#1072#1076#1091#1089)
+        end
+        object Button9: TButton
+          Left = 463
+          Top = 24
+          Width = 129
+          Height = 25
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' EEPROM'
+          TabOrder = 1
+          OnClick = Button9Click
+        end
+        object Button10: TButton
+          Left = 335
+          Top = 24
+          Width = 122
+          Height = 25
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1079' EEPROM'
+          TabOrder = 2
+          OnClick = Button10Click
+        end
+      end
+      object GroupBox4: TGroupBox
+        Left = 16
+        Top = 88
+        Width = 601
+        Height = 81
+        Caption = #1055#1077#1088#1080#1086#1076' '#1086#1087#1088#1086#1089#1072
+        TabOrder = 1
+      end
     end
     object TabSheet3: TTabSheet
       Caption = #1043#1088#1072#1092#1080#1082#1080
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 481
       object Label35: TLabel
         Left = 720
         Top = 267
@@ -873,7 +914,19 @@ object Form1: TForm1
       end
       item
         Width = 250
+      end
+      item
+        Width = 50
       end>
+  end
+  object CheckBox3: TCheckBox
+    Left = 696
+    Top = 72
+    Width = 281
+    Height = 25
+    Caption = #1054#1090#1087#1088#1072#1074#1083#1103#1090#1100' '#1086#1090#1083#1072#1076#1082#1091
+    TabOrder = 3
+    OnClick = CheckBox3Click
   end
   object ComPort1: TComPort
     BaudRate = br115200
@@ -891,12 +944,12 @@ object Form1: TForm1
     StoredProps = [spBasic]
     TriggersOnRxChar = False
     OnRxChar = ComPort1RxChar
-    Left = 688
-    Top = 40
+    Left = 720
+    Top = 65528
   end
   object MainMenu1: TMainMenu
-    Left = 752
-    Top = 56
+    Left = 784
+    Top = 65528
     object N1: TMenuItem
       Caption = #1060#1072#1081#1083
       object N2: TMenuItem
@@ -910,16 +963,16 @@ object Form1: TForm1
     StartString = 'GR'
     StopString = '#'
     OnPacket = ComDataPacket1Packet
-    Left = 800
-    Top = 24
+    Left = 824
+    Top = 65520
   end
   object ComDataPacket2: TComDataPacket
     ComPort = ComPort1
     StartString = 'GP'
     StopString = '#'
     OnPacket = ComDataPacket2Packet
-    Left = 868
-    Top = 71
+    Left = 892
+    Top = 65535
   end
   object ComDataPacket3: TComDataPacket
     ComPort = ComPort1
@@ -927,15 +980,13 @@ object Form1: TForm1
     StopString = '#'
     OnPacket = ComDataPacket3Packet
     Left = 928
-    Top = 16
   end
   object ComDataPacket4: TComDataPacket
     ComPort = ComPort1
     StartString = '$P'
     StopString = '#'
     OnPacket = ComDataPacket4Packet
-    Left = 744
-    Top = 24
+    Left = 752
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
@@ -947,8 +998,7 @@ object Form1: TForm1
     StartString = 'DD'
     StopString = '#'
     OnPacket = ComDataPacket5Packet
-    Left = 920
-    Top = 80
+    Left = 968
   end
   object ComDataPacket6: TComDataPacket
     ComPort = ComPort1
@@ -963,7 +1013,14 @@ object Form1: TForm1
     StartString = 'LP'
     StopString = '#'
     OnPacket = ComDataPacket7Packet
-    Left = 864
-    Top = 32
+    Left = 872
+    Top = 8
+  end
+  object ComDataPacket8: TComDataPacket
+    ComPort = ComPort1
+    StartString = 'LD'
+    StopString = '#'
+    OnPacket = ComDataPacket8Packet
+    Left = 848
   end
 end
