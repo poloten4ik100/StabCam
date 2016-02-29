@@ -108,6 +108,7 @@ type
     ComDataPacket8: TComDataPacket;
     CheckBox3: TCheckBox;
     GroupBox4: TGroupBox;
+    ComboBox3: TComboBox;
     procedure BitBtn1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -143,6 +144,7 @@ type
     procedure ComDataPacket8Packet(Sender: TObject; const Str: string);
     procedure Button10Click(Sender: TObject);
     procedure CheckBox3Click(Sender: TObject);
+    procedure ComboBox3Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -284,6 +286,16 @@ ComPort1.WriteStr('SD0.01'+#10);
 end;
 
 
+end;
+
+procedure TForm1.ComboBox3Change(Sender: TObject);
+begin
+  RP_d:=Trunc(RP_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));
+  RI_d:=Trunc(RI_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));;
+  RD_d:=Trunc(RD_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));;
+  PP_d:=Trunc(PP_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));;
+  PI_d:=Trunc(PI_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));;
+  PD_d:=Trunc(PD_d*strtofloat(ComboBox3.Items[ComboBox3.ItemIndex]));;
 end;
 
 procedure TForm1.ComPort1RxChar(Sender: TObject; Count: Integer);

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "i2c.h"
+#include <Wire.h>
 
 // Адреса регистров акселерометра
 #define POWER_CTL 0x2D
@@ -21,13 +22,20 @@ void setupADXL345()
 
 void getADXLValues()
 {
-  byte xMSB = readRegister(ADXL345_Address, 0x33);
-  byte xLSB = readRegister(ADXL345_Address, 0x32);
-  x_a = ((xMSB << 8) | xLSB);
-  byte yMSB = readRegister(ADXL345_Address, 0x35);
-  byte yLSB = readRegister(ADXL345_Address, 0x34);
-  y_a = ((yMSB << 8) | yLSB);
-  byte zMSB = readRegister(ADXL345_Address, 0x37);
-  byte zLSB = readRegister(ADXL345_Address, 0x36);
-  z_a = ((zMSB << 8) | zLSB);
+  byte _buff[6];
+  Wire.beginTransmission(ADXL345_Address); // start transmission to device 
+  Wire.write(0x32);       // sends address to read from
+  Wire.endTransmission();     // end transmission  
+  //Wire.beginTransmission(ADXL345_Address); // start transmission to device
+  Wire.requestFrom(ADXL345_Address, 6);  // request 6 bytes from device  
+  int i = 0;
+  while(Wire.available())     // device may send less than requested (abnormal)
+  { 
+      _buff[i] = Wire.read();  // receive a byte
+      i++;
+  }
+  Wire.endTransmission();     // end transmission
+  x_a = ((_buff[1] << 8) | _buff[0]);
+  y_a = ((_buff[3] << 8) | _buff[2]);
+  z_a = ((_buff[5] << 8) | _buff[4]);
 }

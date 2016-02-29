@@ -41,7 +41,7 @@ double pre_error_pitch = 0;
 double pre_error_pitch2 =0;
 double res_pitch = 0;
 double pre_res_pitch = 0;
-double K = 0.04;
+double K = 0.01;
 double atmp_roll,at_roll = 0;
 double atmp_pitch,at_pitch = 0;
 double delitel = 1;
@@ -86,6 +86,9 @@ String data_pid = "";
 boolean stringComplete = false;  // whether the string is complete
 int a=0;
 long lastMotorDelayTime = 0;
+long t1 = 0;
+long t2 = 0;
+long interval = 1770;
 //////////////////////////////////////////////////////////////////////////////
 void clear_pitch() 
 {
@@ -111,9 +114,10 @@ void setup() {
   Serial.begin(115200);   
   inputString.reserve(200);
   Wire.begin();
+  Wire.setClock(400000);
   setupL3G4200D();
   setupADXL345();
-  setPwmFrequency(IN1);
+ setPwmFrequency(IN1);
   setPwmFrequency(IN2);
   setPwmFrequency(IN3);
   setPwmFrequency(IN4);
@@ -181,6 +185,12 @@ unsigned int integerValue=0;
 char incomingByte;
 
 void loop() {
+// 
+//  if((micros() - lastMotorDelayTime) > interval)
+ //{
+//  t1 = micros();
+  
+ // Serial.println(millis() - lastMotorDelayTime);
   if (stringComplete) {
     data_pid = inputString.substring(2);
     data_pid.trim();
@@ -319,11 +329,11 @@ void loop() {
   roll = (atan2(ya ,sqrt(za*za + xa*xa)) * 180) / 3.14;
   pitch = (atan2(xa ,sqrt(za*za + ya*ya)) * 180) / 3.14;
   // Интегрируем угловую скорость
-  atmp_roll = at_roll + (-1)*(x*0.07 +0.2592)*0.001;
-  atmp_pitch = at_pitch + (y*0.07 +0.8275)*0.001;
+  atmp_roll = at_roll + (-1)*(x*0.07 +0.2592)*(interval*0.000001);
+  atmp_pitch = at_pitch + (y*0.07 +0.8275)*(interval*0.000001);
   // Альфа-бета фильтр
-  FilterRoll = (1-K)*(FilterRoll+(-1)*(x*0.07 +0.2592)*0.001)+K*roll;
-  FilterPitch = (1-K)*(FilterPitch+(y*0.07 +0.8275)*0.001)+K*pitch; 
+  FilterRoll = (1-K)*(FilterRoll+(-1)*(x*0.07 +0.2592)*(interval*0.000001))+K*roll;
+  FilterPitch = (1-K)*(FilterPitch+(y*0.07 +0.8275)*(interval*0.000001))+K*pitch; 
   if (DEBUG)
   debug_dbl("GR",roll,FilterRoll,atmp_roll,1);
   at_roll = atmp_roll; 
@@ -332,12 +342,14 @@ void loop() {
   at_pitch = atmp_pitch; // Используем только в гуях
   // ПИД-регулятор
   error_roll = 0-FilterRoll;
-  res_roll = pre_res_roll+RKp*(error_roll-pre_error_roll)+ RKi*(error_roll+pre_error_roll)/2+RKd*(x*0.07 +0.2592)*0.001;// + RKd*(error_roll-2*pre_error_roll+pre_error_roll2);////PKp*(error_pitch);// //PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2); //
+  res_roll = pre_res_roll+RKp*(error_roll-pre_error_roll)+ RKi*(error_roll+pre_error_roll)/2+RKd*(x*0.07 +0.2592)*(interval*0.000001);// + RKd*(error_roll-2*pre_error_roll+pre_error_roll2);////PKp*(error_pitch);// //PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2); //
   out = res_roll / delitel;
- /* if (out>64)
-  out =64;
-  if (out<-64)
-  out = -64;*/
+ /* if (out>120)
+  clear_roll();
+  //out =64;
+  if (out<-120)
+  clear_roll();*/
+  //out = -64;
   RunMotor2((-1)*(int)out);   
   pre_res_roll = res_roll;
   pre_error_roll = error_roll;
@@ -345,7 +357,7 @@ void loop() {
   if (DEBUG)
   debug_dbl("$R",error_roll,FilterRoll,(-1)*(int)out,1);  
   error_pitch = 0-FilterPitch;
-  res_pitch = pre_res_pitch+PKp*(error_pitch-pre_error_pitch)+ PKi*(error_pitch+pre_error_pitch)/2+(-1)*PKd*(y*0.07 +0.8275)*0.001;//+PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2);//+(-1)*PKd*(y*0.07 +0.8275)*0.01;//PKp*(error_pitch);// // //
+  res_pitch = pre_res_pitch+PKp*(error_pitch-pre_error_pitch)+ PKi*(error_pitch+pre_error_pitch)/2+(-1)*PKd*(y*0.07 +0.8275)*(interval*0.000001);//+PKd*(error_pitch-2*pre_error_pitch+pre_error_pitch2);//+(-1)*PKd*(y*0.07 +0.8275)*0.01;//PKp*(error_pitch);// // //
   out = res_pitch / delitel;
   RunMotor1((int)out);
   pre_res_pitch = res_pitch;
@@ -353,9 +365,17 @@ void loop() {
   //pre_error_pitch2 = pre_error_pitch;
   if (DEBUG)
   debug_dbl("$P",error_pitch,FilterPitch,(int)out,1);
-  // DEBUG INFO
-  //debug_dbl("DD",RKp,RKi,RKd,5);
-  delay(delay_);
+  // DEBUG INFO*/
+//  delay(1000);
+// debug_dbl("DD",FilterRoll,FilterPitch,millis(),1);
+ // lastMotorDelayTime = micros();
+ // */
+//  Serial.println("da1");
+//Serial.println(millis());
+// t2 = micros() - t1;
+ //Serial.println(t2);
+  //delay(delay_);
+//}
 }
 
  void debug_dbl(String param, double p1, double p2, double p3, int c) {

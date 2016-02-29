@@ -928,6 +928,25 @@ object Form1: TForm1
     TabOrder = 3
     OnClick = CheckBox3Click
   end
+  object ComboBox3: TComboBox
+    Left = 696
+    Top = 32
+    Width = 169
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 3
+    TabOrder = 4
+    Text = '1'
+    OnChange = ComboBox3Change
+    Items.Strings = (
+      '0.001'
+      '0.01'
+      '0.1'
+      '1'
+      '10'
+      '100'
+      '1000')
+  end
   object ComPort1: TComPort
     BaudRate = br115200
     Port = 'COM1'
@@ -944,8 +963,8 @@ object Form1: TForm1
     StoredProps = [spBasic]
     TriggersOnRxChar = False
     OnRxChar = ComPort1RxChar
-    Left = 720
-    Top = 65528
+    Left = 968
+    Top = 8
   end
   object MainMenu1: TMainMenu
     Left = 784
@@ -963,8 +982,7 @@ object Form1: TForm1
     StartString = 'GR'
     StopString = '#'
     OnPacket = ComDataPacket1Packet
-    Left = 824
-    Top = 65520
+    Left = 952
   end
   object ComDataPacket2: TComDataPacket
     ComPort = ComPort1
@@ -986,7 +1004,8 @@ object Form1: TForm1
     StartString = '$P'
     StopString = '#'
     OnPacket = ComDataPacket4Packet
-    Left = 752
+    Left = 928
+    Top = 32
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
@@ -1005,22 +1024,23 @@ object Form1: TForm1
     StartString = 'LR'
     StopString = '#'
     OnPacket = ComDataPacket6Packet
-    Left = 688
-    Top = 8
+    Left = 968
+    Top = 40
   end
   object ComDataPacket7: TComDataPacket
     ComPort = ComPort1
     StartString = 'LP'
     StopString = '#'
     OnPacket = ComDataPacket7Packet
-    Left = 872
-    Top = 8
+    Left = 936
+    Top = 65528
   end
   object ComDataPacket8: TComDataPacket
     ComPort = ComPort1
     StartString = 'LD'
     StopString = '#'
     OnPacket = ComDataPacket8Packet
-    Left = 848
+    Left = 920
+    Top = 16
   end
 end
